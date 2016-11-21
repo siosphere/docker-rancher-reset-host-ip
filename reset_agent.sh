@@ -2,8 +2,8 @@
 
 DOCKER_CMD=$(docker inspect -f "{{.Config.Cmd}}" rancher-agent-bootstrap | sed 's/[\[{}]//g' | sed 's/\]//g')
 AGENT_IMAGE=$(docker inspect -f "{{.Config.Image}}" rancher-agent-bootstrap)
-# http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-HOST_IP=$(wget -qO- https://api.ipify.org/)
+# https://www.ipify.org/
+HOST_IP=$(curl -s https://api.ipify.org)
 
 docker run -d -e CATTLE_AGENT_IP=$HOST_IP \
     --privileged \
